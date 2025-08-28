@@ -69,6 +69,17 @@ using namespace facebook::react;
   return concreteComponentDescriptorProvider<BlurViewComponentDescriptor>();
 }
 
+- (void)mountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index
+{
+  [self.blurEffectView.contentView insertSubview:(UIView *)childComponentView
+                                         atIndex:index];
+}
+
+- (void)unmountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index
+{
+  [(UIView *)childComponentView removeFromSuperview];
+}
+
 - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
 {
   const auto &oldViewProps = *std::static_pointer_cast<const BlurViewProps>(_props);
